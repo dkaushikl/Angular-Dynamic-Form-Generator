@@ -34,7 +34,7 @@ jobs:
       - run: 'npm run lint'
 
       # Lint the source code
-      - run: 'npm run build'
+      - run: 'npm run build:prod'
 
       # Deploy project to github
       - run: 'ng deploy --token=$GITHUB_TOKEN'
