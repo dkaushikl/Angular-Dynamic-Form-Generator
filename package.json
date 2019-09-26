@@ -1,13 +1,38 @@
 {
   "name": "angular-dynamic-form-genarator",
   "version": "0.0.0",
+  "homepage": "https://github.com/dkaushikl/Angular-Dynamic-Form-Generator",
+  "bugs": "https://github.com/dkaushikl/Angular-Dynamic-Form-Generator/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dkaushikl/Angular-Dynamic-Form-Generator.git"
+  },
+  "author": {
+    "name": "Kaushik Dhameliya",
+    "email": "dhameliyakaushik13@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "e2e": "ng e2e",
+    "build:dev": "ng build",
+    "build:prod": "ng build -prod",
     "test": "ng test",
+    "test:coverage": "ng test --code-coverage",
+    "test:sr:coverage": "ng test --single-run --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint:fix": "npm run lint -- --fix",
+    "pretty": "prettier --write --tab-width 2 \"src/**/*.ts\"",
+    "compodoc": "npx compodoc -p tsconfig.app.json",
+    "clean": "rimraf node_modules dist coverage",
+    "clean:dist": "rimraf dist",
+    "clean:install": "npm run clean && npm install"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged && npm run lint:fix && npm run lint"
+    }
   },
   "private": true,
   "dependencies": {
