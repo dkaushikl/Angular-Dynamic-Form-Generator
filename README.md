@@ -1,4 +1,6 @@
 # Angular Dynamic Form Genarator
+[![CircleCI](https://circleci.com/gh/dkaushikl/Angular-Dynamic-Form-Generator.svg?style=svg)](https://circleci.com/gh/dkaushikl/Angular-Dynamic-Form-Generator)
+<br/>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 
