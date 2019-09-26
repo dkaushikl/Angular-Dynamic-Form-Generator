@@ -17,7 +17,7 @@
     "e2e": "ng e2e",
     "deploy": "ng deploy",
     "build:dev": "ng build",
-    "build:prod": "ng build --aot",
+    "build:prod": "ng build --prod --aot",
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
     "test:sr:coverage": "ng test --single-run --code-coverage",
