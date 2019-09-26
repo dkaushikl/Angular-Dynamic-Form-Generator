@@ -34,9 +34,6 @@ jobs:
       - run: 'npm run lint'
 
       # Lint the source code
-      - run: 'npm run test'
-
-      # Lint the source code
       - run: 'npm run build'
 
       # Deploy project to github
