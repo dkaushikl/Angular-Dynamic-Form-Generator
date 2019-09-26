@@ -16,7 +16,7 @@
     "start": "ng serve",
     "e2e": "ng e2e",
     "build:dev": "ng build",
-    "build:prod": "ng build -prod",
+    "build:prod": "ng build --aot",
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
     "test:sr:coverage": "ng test --single-run --code-coverage",
