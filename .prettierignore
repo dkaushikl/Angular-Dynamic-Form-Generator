@@ -1,0 +1,12 @@
+node_modules/**
+package.json
+package-lock.json
+dist
+documentation
+src/assets
+.angulardoc.json
+.vscode/*
+*.html
+*.css
+*.scss
+*.ico

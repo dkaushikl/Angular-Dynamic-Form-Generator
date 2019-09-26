@@ -1,0 +1,137 @@
+<section class="content">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="box">
+        <div class="box-body">
+          <div class="form-group">
+            <label>Select Templates</label>
+            <div class="input text">
+              <ng-select [items]="selectTemplates" [selectOnTab]="true" bindLabel="name" [(ngModel)]="selectTemplate"
+                name="selectTemplate" placeholder="Select Template">
+              </ng-select>
+            </div>
+            <div class="form-group">
+              <label>Pre Template</label>
+              <div>
+                <input class="form-control" [(ngModel)]="preTemplate">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Post Template</label>
+              <div>
+                <input class="form-control" [(ngModel)]="postTemplate">
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <button type="button" (click)="generateBasicSetting()" class="btn btn-primary">Submit</button>
+          </div>
+          <form [formGroup]="detailform">
+            <div class="box-body col-lg-12">
+              <div class="form-group">
+                <label>Name</label>
+                <div class="input text">
+                  <ng-select [items]="type" [selectOnTab]="true" bindLabel="name" formControlName="type"
+                    [(ngModel)]="dropdowntype" name="Type" placeholder="Select people">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Title</label>
+                <div>
+                  <input class="form-control" formControlName="title" [id]="genid">
+                </div>
+              </div>
+              <div
+                *ngIf="dropdowntype.name === 'TextBox' ||dropdowntype.name === 'TextArea' || dropdowntype.name === 'DropDown' ">
+                <label>PlaceHolder</label>
+                <div>
+                  <input class="form-control" formControlName="placeHolder" [id]="genid">
+                </div>
+              </div>
+              <div>
+                <label>Model</label>
+                <div>
+                  <input class="form-control" formControlName="model" [id]="genid">
+                </div>
+              </div>
+              <div *ngIf="dropdowntype.name === 'TextBox' ||dropdowntype.name === 'TextArea'  ">
+                <label>Directive</label>
+                <div>
+                  <input class="form-control" formControlName="directive" [id]="genid">
+                </div>
+              </div>
+              <div
+                *ngIf="dropdowntype.name === 'TextBox' ||dropdowntype.name === 'TextArea' || dropdowntype.name === 'CheckBox' ">
+                <label>value</label>
+                <div>
+                  <input class="form-control" formControlName="value" [id]="genid">
+                </div>
+              </div>
+              <div *ngIf="dropdowntype.name === 'DropDown' || dropdowntype.name === 'Radiobutton'">
+                <label *ngIf="dropdowntype.name === 'DropDown' ">dropdownoption</label>
+                <label *ngIf="dropdowntype.name === 'Radiobutton'  ">SelectOption</label>
+                <div>
+                  <input class="form-control" formControlName="options" [id]="genid">
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="button" (click)="test()" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+          <form>
+            <div class="box-body col-lg-12">
+              <div *ngFor="let controller of Allcontroller; let i = index">
+                <div [ngSwitch]="controller.type">
+                  <div *ngSwitchCase="'TextBox'">
+                    <label>{{controller.name}}:</label>
+                    <input class="form-control" directive [id]="genid" placeholder="{{controller.placeHolder}}"
+                      value="{{controller.value}}" [type]="controller.type">
+                  </div>
+                  <div *ngSwitchCase="'DropDown'">
+                    <label>{{controller.name}}:</label>
+                    <select [id]="dropdowntype" class="form-control">
+                      <option *ngFor="let opt of controller.options" [value]="opt">{{opt}}</option>
+                    </select>
+                  </div>
+                  <div *ngSwitchCase="'TextArea'">
+                    <label>{{controller.name}}:</label>
+                    <textarea *ngSwitchCase="'TextArea'" placeholder="{{controller.placeHolder}}" class="form-control">
+                          {{controller.value}}
+                          </textarea>
+                  </div>
+                  <div *ngSwitchCase="'CheckBox'">
+                    <label>Enter Label:</label>
+                    <input type="checkbox" name="{{controller.value}}"> {{controller.name}}<br>
+                  </div>
+                  <div *ngSwitchCase="'Radiobutton'">
+                    <label>{{controller.name}}</label>
+                    <div *ngFor="let option of controller.options">
+                      <input type="radio" name="{{controller.name}}"> {{option}}<br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="box-footer">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="box">
+        <div class="box-body">
+          <div style="float: right;">
+            <!-- <img  width="30px" height="30px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAACSElEQVRYhe3WS2gTQRzH8e9/N9nWxKColxYEUfpAwVMOgjbWSEsPpiD26EFP6smUthdP3kSIRDzUgoh4UhDFUCxFidVDzmIVEbEi+ARLlWpiH0nGSwohbpo+dmd7yO/4n//MfphZdhbqqcfbiFcP/tbff7hoGJdE5FZzInGjWp8nwM+Dg1EpFkcRCQBKROLNicQ1u15Ds41UOhN50X3symJj41ypJEqpq18HBs7b9WvdwVQ6E1GixkCCZqHwbv/E+A7f/Py20rASkTOVx61tB9V1on41mwQJAhRMs/XlkZ4feathptQiSqlTlfO0ANUIEYRU11Rfu7/w+81SvWiabZPRnul8Q8MMSuWMYvGCdqAaIQI8Ajb7VDbQ9aFvVzmyYJqtk53dn5RhxJqSyeeV8119B8tx5fW8BHOPd9//uGiG9gI5QxHrPXrwqd0argGr4cqRT/bce5uXLUPVcK4Ba+FKyQG9cpb0cms5DnQSBw4DncaBg0A3cOAQ0C0cOPAdVMN04BIO1rmDapgODMZwCQfrAOrAwRqBunCwBqBOHKwSqBsHqwB6gYMVAr3CwQqAXuKgBtBrHCwD3Ag4qHLVqXFrHyYpauEUMTdxUO0ubuQELdYUwpzt+NLOnaPqn7BTsQeKdGJKmBbrtQ3S9WMtz3/Am5fbQtkF3wEAG6RWnC3w12zgdPxOeFN23kcF8qdunC1w+o91/NWXrcTvhsku+P4CExiMstM6pBsH4KssKMQfbf/+bHto4cHDTNPtkxffz+pG1VPPRso/MmLz1402yqcAAAAASUVORK5CYII="> -->
+            <img width="30px" height="30px" (click)="copyText()"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAACPElEQVRYhe2YT0gUURzHv+/1ZpzVAhdFkmVrRTxkHtw2bCMIAv90kCjouklseOjiocPWzYOSXQIvQoJg4XEh9hAZePBmLit57RBU6CWSFqTa1nFel0Zcexuz83srLcz3NO83733nM/P4vpk3DBqUeFYw2ot7jyExBgAMcrFU+vVodfKaTfXmdDygrWhPS+AcZyzOGYtLsPNNljWtw5upijee5hfLZSclIT3fAGcs+jqT3AKA4al8lIn9z94hmNNk8Be5BwN3j54TqgHlPSd1/+ZFLoSabza7jluDAwftV6sbP+19p6KPYYofo1cvNLvtlyt5TNy+pPSzbYfP5Qp3AHgDlFJWhVPpbKTd+Lj1dWl4Kp8CAMPCUqyzw/Q6XggOKdWzpQSsVb3dZwTAr3za/vJeciZjnR1mb3dEi7cvk5aQiZ3iLtpaTwEAOGfo64mKvp6o0m+nuIuWkOcHSgccTHRhpfAB30tlT/1PhkwMJbr8XMofYOx0K+6Nxn1dsFZpWQfrqQCQqgCQqv8ekLTaz2bXD44jYQsL4/1Iz29i+1up5tpyJol0+J10awDw5uFlRn4dLWeSFe2F8f6/+vipXX/yFkADTDEJMBK2dHFU9SYBqqZJl1xvEmB6flMLzL+8SYCHE6dbrncQEqp3EBKqdxASqoKQUL2DkFC9g5BQvZWAjDHHth3VqQodR0iUn/zGCf58LlcYq/ZLzFX2z/6iHtISwJGZNVkvjcysSaABQkLe1bm7L+q282itYfQbRTktpig6ut4AAAAASUVORK5CYII=">
+          </div>
+          <textarea (change)="editJSON()" [(ngModel)]="jsoncontent" rows="36" cols="100">
+            </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
